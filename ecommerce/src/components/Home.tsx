@@ -22,7 +22,10 @@ interface ICategory {
 function Home(): JSX.Element {
   const [banners, setBanners] = useState<IBanner[]>();
   const [categories, setCategories] = useState<ICategory[]>();
-  const apiURL = 'http://localhost:3000';
+  const apiURL =
+    process.env.REACT_APP_API_URL != null
+      ? process.env.REACT_APP_API_URL
+      : 'http://localhost:3000';
 
   const loadBanners = async (): Promise<void> => {
     try {
@@ -54,7 +57,8 @@ function Home(): JSX.Element {
 
   return (
     <>
-      <div id="carouselBanner" className="carousel slide">
+      {/* -- Banners -- */}
+      <div id="carouselExampleIndicators" className="carousel slide">
         {banners != null && banners.length > 0
           ? banners.map((banner, index) => {
               return (
@@ -64,7 +68,7 @@ function Home(): JSX.Element {
                 >
                   <button
                     type="button"
-                    data-bs-target="#carouselBanner"
+                    data-bs-target="#carouselExampleIndicators"
                     data-bs-slide-to={index}
                     className={index === 0 ? 'active' : ''}
                     aria-label={`Slide ${index + 1}`}
@@ -78,7 +82,9 @@ function Home(): JSX.Element {
             ? banners.map((banner, index) => {
                 return (
                   <div
-                    className="carousel-item active"
+                    className={
+                      index === 0 ? 'carousel-item active' : 'carousel-item'
+                    }
                     key={`slideimage${index}`}
                   >
                     <img
@@ -116,33 +122,63 @@ function Home(): JSX.Element {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
+
+      {/* -- Categories -- */}
       {categories != null && categories.length > 0
         ? categories.map((category, index) => {
-            return (
-              <section className="category" key={`categorysection${index}`}>
-                <div className="container">
-                  <div className="row">
-                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                      <div className="img">
-                        <img
-                          src={`${apiURL}/${category.imageUrl}`}
-                          alt={category.name}
-                        ></img>
+            if (index % 2 === 0) {
+              return (
+                <section className="category" key={`categorysection${index}`}>
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                        <div className="img">
+                          <img
+                            src={`${apiURL}/${category.imageUrl}`}
+                            alt={category.name}
+                          ></img>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                      <div className="img-text">
-                        <div className="heading">{category.name}</div>
-                        <p>{category.description}</p>
-                        <div className="btn">
-                          <button>Explore fruit-and-veg </button>
+                      <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                        <div className="img-text">
+                          <div className="heading">{category.name}</div>
+                          <p>{category.description}</p>
+                          <div className="btn">
+                            <button>Explore {category.key} </button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </section>
-            );
+                </section>
+              );
+            } else {
+              return (
+                <section className="category" key={`categorysection${index}`}>
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                        <div className="img-text">
+                          <div className="heading">{category.name}</div>
+                          <p>{category.description}</p>
+                          <div className="btn">
+                            <button>Explore {category.key} </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                        <div className="img">
+                          <img
+                            src={`${apiURL}/${category.imageUrl}`}
+                            alt={category.name}
+                          ></img>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              );
+            }
           })
         : ''}
     </>
