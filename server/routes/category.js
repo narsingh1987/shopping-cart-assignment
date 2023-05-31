@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const lodash = require("lodash");
 
 var sendResponse = function (err, req, res, data) {
   if (err) {
@@ -73,7 +74,14 @@ router.get("/getAll", function (req, res, next) {
     },
   ];
 
-  sendResponse(null, req, res, categories);
+  sendResponse(
+    null,
+    req,
+    res,
+    lodash.filter(categories, function (item) {
+      return item.enabled;
+    })
+  );
 });
 
 module.exports = function (app) {

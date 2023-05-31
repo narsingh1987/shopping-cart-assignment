@@ -5,6 +5,7 @@ import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from './components/Layout';
 import Home from './components/Home';
+import Product from './components/Product';
 
 function App(): JSX.Element {
   return (
@@ -13,7 +14,10 @@ function App(): JSX.Element {
         <Routes>
           <Route path="/" element={<Layout></Layout>}>
             <Route index element={<Home></Home>}></Route>
-            <Route path="/products"></Route>
+            <Route
+              path="/products/:categoryId?"
+              element={<Product></Product>}
+            ></Route>
           </Route>
         </Routes>
       </BrowserRouter>

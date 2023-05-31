@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const lodash = require("lodash");
 
 var sendResponse = function (err, req, res, data) {
   if (err) {
@@ -51,7 +52,14 @@ router.get("/getAll", function (req, res, next) {
     },
   ];
 
-  sendResponse(null, req, res, banners);
+  sendResponse(
+    null,
+    req,
+    res,
+    lodash.filter(banners, function (item) {
+      return item.isActive;
+    })
+  );
 });
 
 module.exports = function (app) {

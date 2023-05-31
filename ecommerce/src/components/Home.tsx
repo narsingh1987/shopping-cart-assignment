@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 interface IBanner {
@@ -144,7 +145,9 @@ function Home(): JSX.Element {
                           <div className="heading">{category.name}</div>
                           <p>{category.description}</p>
                           <div className="btn">
-                            <button>Explore {category.key} </button>
+                            <Link to={`/products/${category.id}`}>
+                              Explore {category.key}
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -162,7 +165,9 @@ function Home(): JSX.Element {
                           <div className="heading">{category.name}</div>
                           <p>{category.description}</p>
                           <div className="btn">
-                            <button>Explore {category.key} </button>
+                            <Link to={`/products/${category.id}`}>
+                              Explore {category.key}
+                            </Link>
                           </div>
                         </div>
                       </div>

@@ -58,6 +58,23 @@ button {
   color: #ffffff;
   font-size: 16px;
 }
+
+.btn a {
+  padding: 10px 15px;
+  background: #d42559;
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.btn a:hover {
+  padding: 10px 15px;
+  background: #d42559;
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+}
+
 /*header*/
 /*header-banner*/
 .carousel-item {
