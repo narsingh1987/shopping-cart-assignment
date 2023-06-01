@@ -1,24 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
-interface IBanner {
-  bannerImageUrl: string;
-  bannerImageAlt: string;
-  isActive: boolean;
-  order: number;
-  id: string;
-}
-
-interface ICategory {
-  name: string;
-  key: string;
-  description: string;
-  enabled: boolean;
-  order: number;
-  imageUrl: string;
-  id: string;
-}
+import { ICategory, IBanner } from '../redux/types';
 
 function Home(): JSX.Element {
   const [banners, setBanners] = useState<IBanner[]>();

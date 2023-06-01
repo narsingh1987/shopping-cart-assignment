@@ -59,7 +59,7 @@ button {
   font-size: 16px;
 }
 
-.btn a {
+.category .btn a {
   padding: 10px 15px;
   background: #d42559;
   color: #ffffff;
@@ -67,7 +67,7 @@ button {
   text-decoration: none;
 }
 
-.btn a:hover {
+.category .btn a:hover {
   padding: 10px 15px;
   background: #d42559;
   color: #ffffff;
@@ -92,11 +92,16 @@ div#carouselExampleIndicators {
   box-shadow: 0px 30px 20px -30px #a19f9f;
 }
 
-.row {
+.category .row {
   padding: 50px;
   text-align: center;
   align-items: center;
 }
+
+.padding {
+  padding: 50px 0;
+}
+
 .heading {
   font-size: 30px;
   font-weight: 500;
@@ -127,6 +132,82 @@ p {
 }
 .copy-right {
   background: #cdcdcd;
+}
+/*product*/
+.item-heading {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: normal;
+  color: #000000;
+  overflow: inherit;
+  height: 20px;
+  margin-top: 40px;
+}
+.buy-price .row {
+  align-items: center;
+}
+.product-item .buy-price {
+  padding-bottom: 30px;
+}
+
+.item-detail {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  margin: 10px 0;
+  padding: 5px 5px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 16px;
+  height: 76px;
+}
+.product-item .heading-menu {
+  background-color: #cdcdcd;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+}
+
+.product-item .buy-btn a {
+  display: block;
+  border-radius: 3px;
+  text-align: left;
+  text-decoration: none;
+  border: 1px solid #ffffff;
+  background-color: #d42559;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px;
+}
+.heading-menu a {
+  color: #000000;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 5px;
+}
+.price-buy-mobile {
+  display: none;
+}
+.mobile-hide {
+  display: flex;
+  align-items: center;
+}
+
+.item-price {
+  text-align: left;
+}
+.fruit-product .fruit {
+  padding: 50px 0 30px;
+}
+.fruit-product .fruit {
+  align-items: start;
+}
+.fruit-product .col-xl-3.col-lg-3.col-md-0.col-0.bg-color-grey {
+  background-color: #d5d5d5;
 }
 
 /*Media Query*/
@@ -163,6 +244,43 @@ p {
   .painting-supplay .painting-img {
     height: auto;
   }
+  .buy-price .row {
+    margin-right: 1px;
+  }
+  .mobile-hide {
+    display: none !important;
+  }
+  .price-buy-mobile {
+    display: block;
+  }
+  .table-view {
+    float: left;
+    display: inline-flex;
+  }
+  .item-img img {
+    width: 130px;
+    height: 130px;
+  }
+  .table-view .item-detail {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    margin: 10px 0;
+    padding: 5px 5px;
+    box-shadow: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+    height: 90px;
+  }
+  .price-buy-mobile {
+    background-color: #d42559;
+    text-align: center;
+    padding: 10px 0;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+  }
 }
 
 /* Landscape phones and portrait tablets */
@@ -170,11 +288,31 @@ p {
   .painting-supplay .painting-img {
     height: auto;
   }
+  .price-buy-mobile {
+    display: block;
+  }
+  .price-buy-mobile {
+    background-color: #d42559;
+    text-align: center;
+    padding: 10px 0;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .product-item .heading-menu {
+    display: none;
+  }
 }
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
   .painting-supplay .painting-img {
     height: auto;
+  }
+  .price-buy-mobile {
+    display: block;
+  }
+  .mobile-hide {
+    display: none !important;
   }
 }
