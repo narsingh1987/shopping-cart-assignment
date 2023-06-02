@@ -2,12 +2,23 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import { IProduct, ICategory } from '../redux/types';
+import { cartActions, ICart, ICartItem } from '../redux/cart/slice';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 
 function Product(): JSX.Element {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [categories, setCategories] = useState<ICategory[]>([]);
   const params = useParams();
   const categoryId = params.categoryId ?? '';
+
+  const dispatch = useAppDispatch();
+
+  const { Items } = useAppSelector((state) => state.cart);
+
+  const buyNow = (product: IProduct): void => {
+    const Item: ICartItem = { Id: product.id, Qty: 1 };
+    dispatch(cartActions.addItem(Item));
+  };
 
   const apiURL: string =
     process.env.REACT_APP_API_URL != null
@@ -56,7 +67,10 @@ function Product(): JSX.Element {
           const product = productsWithIndex[i + j].product;
 
           subcontent.push(
-            <div className="col-xl-3 col-lg-3 col-md-6 col-12">
+            <div
+              className="col-xl-3 col-lg-3 col-md-6 col-12"
+              key={`product${product.id}`}
+            >
               <div className="item-heading">{product?.name}</div>
               <div className="table-view">
                 <div className="item-img">
@@ -80,7 +94,7 @@ function Product(): JSX.Element {
                     </div>
                     <div className="col-md-6">
                       <div className="buy-btn">
-                        <a href="javascript:void(0)">Buy Now </a>
+                        <button onClick={() => buyNow(product)}>Buy Now</button>
                       </div>
                     </div>
                   </div>
@@ -90,7 +104,11 @@ function Product(): JSX.Element {
           );
         }
 
-        content.push(<div className="row">{subcontent}</div>);
+        content.push(
+          <div className="row" key={`category${i}`}>
+            {subcontent}
+          </div>
+        );
       }
     }
 

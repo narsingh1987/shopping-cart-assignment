@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from './components/Layout';
 import Home from './components/Home';
 import Product from './components/Product';
+import Cart from './components/Cart';
 
 function App(): JSX.Element {
   return (
@@ -18,6 +19,7 @@ function App(): JSX.Element {
               path="/products/:categoryId?"
               element={<Product></Product>}
             ></Route>
+            <Route path="/cart" element={<Cart></Cart>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -40,9 +40,9 @@ function Topbar(): JSX.Element {
             <div className="header-social">
               <ul>
                 <li>
-                  <a href="javascript:void(0)">
+                  <Link to="/cart">
                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-                  </a>{' '}
+                  </Link>
                 </li>
               </ul>
             </div>
