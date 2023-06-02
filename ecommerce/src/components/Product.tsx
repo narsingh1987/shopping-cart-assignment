@@ -18,7 +18,13 @@ function Product(): JSX.Element {
   const { categories } = useAppSelector((state) => state.category);
 
   const buyNow = (product: IProduct): void => {
-    const Item: ICartItem = { Id: product.id, Qty: 1 };
+    const Item: ICartItem = {
+      Id: product.id,
+      name: product.name,
+      imageURL: product.imageURL,
+      price: product.price,
+      Qty: 1,
+    };
     dispatch(cartActions.addItem(Item));
   };
 

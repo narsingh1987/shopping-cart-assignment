@@ -302,6 +302,14 @@ p {
   .product-item .heading-menu {
     display: none;
   }
+
+  /*cart*/
+  .my-cart-item .item-name {
+    padding-bottom: 1px;
+  }
+  .my-cart-item .row .item-text-cart .col-xl-2.col-lg-2.col-md-7.col-6 {
+    padding: 0;
+  }
 }
 
 /* Portrait phones and smaller */
@@ -315,4 +323,26 @@ p {
   .mobile-hide {
     display: none !important;
   }
+}
+
+/*cart-section*/
+.add-digit button {
+  padding: 4px 11px;
+  background: #d42559;
+  color: #ffffff;
+  font-size: 16px;
+  margin: 0 11px;
+}
+.my-cart-item .row.item-text-cart {
+  align-items: center;
+}
+.my-cart-item .totle-price {
+  text-align: right;
+}
+.my-cart-item .item-name {
+  padding-bottom: 20px;
+  text-align: center;
+}
+.my-cart-item .add-digit {
+  text-align: center;
 }
