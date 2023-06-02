@@ -2,52 +2,24 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import { IProduct, ICategory } from '../redux/types';
-import { cartActions, ICart, ICartItem } from '../redux/cart/slice';
+import { cartActions, ICartItem } from '../redux/cart/slice';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { productActions } from '../redux/product/slice';
+import { categoryActions } from '../redux/category/slice';
+import { apiURL } from '../helpers/api_helper';
 
 function Product(): JSX.Element {
-  const [products, setProducts] = useState<IProduct[]>([]);
-  const [categories, setCategories] = useState<ICategory[]>([]);
   const params = useParams();
   const categoryId = params.categoryId ?? '';
 
   const dispatch = useAppDispatch();
 
-  const { Items } = useAppSelector((state) => state.cart);
+  const { products } = useAppSelector((state) => state.product);
+  const { categories } = useAppSelector((state) => state.category);
 
   const buyNow = (product: IProduct): void => {
     const Item: ICartItem = { Id: product.id, Qty: 1 };
     dispatch(cartActions.addItem(Item));
-  };
-
-  const apiURL: string =
-    process.env.REACT_APP_API_URL != null
-      ? process.env.REACT_APP_API_URL
-      : 'http://localhost:3000';
-
-  const loadProduct = async (): Promise<void> => {
-    try {
-      if (categoryId !== '') {
-        const response = await axios.get(
-          `${apiURL}/api/product/getByCategory/${categoryId}`
-        );
-        setProducts(await response.data);
-      } else {
-        const response = await axios.get(`${apiURL}/api/product/getAll`);
-        setProducts(await response.data);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const loadCategories = async (): Promise<void> => {
-    try {
-      const response = await axios.get(`${apiURL}/api/category/getAll`);
-      setCategories((await response).data);
-    } catch (err) {
-      console.error(err);
-    }
   };
 
   const renderProducts = (products: IProduct[]): JSX.Element[] => {
@@ -116,13 +88,13 @@ function Product(): JSX.Element {
   };
 
   useEffect(() => {
-    loadProduct()
-      .then(() => {})
-      .catch(() => {});
+    dispatch(
+      categoryId !== ''
+        ? productActions.getItemsByCategory(categoryId)
+        : productActions.getItems()
+    );
 
-    loadCategories()
-      .then(() => {})
-      .catch(() => {});
+    dispatch(categoryActions.getItems());
   }, [categoryId]);
 
   return (

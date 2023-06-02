@@ -2,41 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ICategory, IBanner } from '../redux/types';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { categoryActions } from '../redux/category/slice';
+import { bannerActions } from '../redux/banner/slice';
+import { apiURL } from '../helpers/api_helper';
 
 function Home(): JSX.Element {
-  const [banners, setBanners] = useState<IBanner[]>();
-  const [categories, setCategories] = useState<ICategory[]>();
-  const apiURL =
-    process.env.REACT_APP_API_URL != null
-      ? process.env.REACT_APP_API_URL
-      : 'http://localhost:3000';
+  const dispatch = useAppDispatch();
 
-  const loadBanners = async (): Promise<void> => {
-    try {
-      const response = await axios.get(`${apiURL}/api/banner/getAll`);
-      setBanners((await response).data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const loadCategories = async (): Promise<void> => {
-    try {
-      const response = await axios.get(`${apiURL}/api/category/getAll`);
-      setCategories((await response).data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const { categories } = useAppSelector((state) => state.category);
+  const { banners } = useAppSelector((state) => state.banner);
 
   useEffect(() => {
-    loadBanners()
-      .then(() => {})
-      .catch(() => {});
+    dispatch(bannerActions.getItems());
 
-    loadCategories()
-      .then(() => {})
-      .catch(() => {});
+    dispatch(categoryActions.getItems());
   }, []);
 
   return (
