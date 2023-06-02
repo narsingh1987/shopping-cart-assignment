@@ -105,7 +105,7 @@ function Product(): JSX.Element {
     loadCategories()
       .then(() => {})
       .catch(() => {});
-  }, []);
+  }, [categoryId]);
 
   return (
     <section className="product-item">
